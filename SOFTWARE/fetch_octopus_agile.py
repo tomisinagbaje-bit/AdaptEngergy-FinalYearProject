@@ -1,9 +1,9 @@
 """Download a year of Octopus Agile half-hourly import prices.
 
 Usage:
-    python scripts/fetch_octopus_agile.py                  # last 365 days, region E
-    python scripts/fetch_octopus_agile.py --region C --days 400
-    python scripts/fetch_octopus_agile.py --start 2025-10-01 --end 2026-10-24
+    python SOFTWARE/fetch_octopus_agile.py                  # last 365 days, region E
+    python SOFTWARE/fetch_octopus_agile.py --region C --days 400
+    python SOFTWARE/fetch_octopus_agile.py --start 2025-10-01 --end 2026-10-24
 
 Output: data/raw/octopus_agile_<region>.csv  (one row per half-hour, UTC, ascending)
 No API key needed: tariff prices are public.

@@ -6,8 +6,8 @@ Datasets (each saved to data/raw/elexon_<name>.csv, UTC, ascending):
     fuelhh  Generation by fuel type (wind, gas, nuclear ...), MW, half-hourly, long format
 
 Usage:
-    python scripts/fetch_elexon.py                       # all three, last 365 days
-    python scripts/fetch_elexon.py --only mid demand --days 400
+    python SOFTWARE/fetch_elexon.py                       # all three, last 365 days
+    python SOFTWARE/fetch_elexon.py --only mid demand --days 400
 """
 import argparse
 import time

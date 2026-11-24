@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Built from data/raw by SOFTWARE/build_dataset.py (rebuild instead of committing)
+data/processed/
+
+# Office lock files
+~$*
