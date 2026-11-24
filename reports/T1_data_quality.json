@@ -1,15 +1,32 @@
 {
-  "built": "2026-11-24 21:12 UTC",
+  "built": "2026-11-24 21:38 UTC",
   "max_fill_slots": 6,
   "sources": [
     {
       "source": "Octopus Agile (E)",
-      "status": "not found: data\\raw\\octopus_agile_E.csv"
+      "first": "2025-11-24 00:00:00+00:00",
+      "last": "2026-11-25 22:30:00+00:00",
+      "expected_slots": 17614,
+      "rows": 17614,
+      "duplicate_slots": 0,
+      "missing_slots": 0,
+      "missing_pct": 0.0,
+      "off_grid_times": 0,
+      "first_missing": [],
+      "not_30_min": 0,
+      "price_inc_vat_p_kwh": {
+        "min": -11.67,
+        "mean": 23.47,
+        "max": 94.76,
+        "negative_slots": 492
+      },
+      "zero_vat_slots": 2688,
+      "zero_vat_from": "2026-09-30 23:00:00+00:00"
     },
     {
       "source": "Elexon mid",
-      "first": "2025-10-24 00:00:00+00:00",
-      "last": "2026-10-24 00:00:00+00:00",
+      "first": "2025-11-24 00:00:00+00:00",
+      "last": "2026-11-24 00:00:00+00:00",
       "expected_slots": 17521,
       "rows": 17521,
       "duplicate_slots": 0,
@@ -23,21 +40,21 @@
           "2026-03-29"
         ],
         "50_periods": [
-          "2025-10-26"
+          "2026-10-25"
         ]
       },
       "no_trade_slots_set_missing": 12,
       "price_gbp_mwh": {
         "min": -58.54,
-        "mean": 99.85,
+        "mean": 110.11,
         "max": 560.81,
-        "negative_slots": 367
+        "negative_slots": 350
       }
     },
     {
       "source": "Elexon demand",
-      "first": "2025-10-23 23:00:00+00:00",
-      "last": "2026-10-23 22:30:00+00:00",
+      "first": "2025-11-24 00:00:00+00:00",
+      "last": "2026-11-23 23:30:00+00:00",
       "expected_slots": 17520,
       "rows": 17520,
       "duplicate_slots": 0,
@@ -51,14 +68,14 @@
           "2026-03-29"
         ],
         "50_periods": [
-          "2025-10-26"
+          "2026-10-25"
         ]
       }
     },
     {
       "source": "Elexon fuelhh",
-      "first": "2025-10-23 23:00:00+00:00",
-      "last": "2026-10-23 22:30:00+00:00",
+      "first": "2025-11-24 00:00:00+00:00",
+      "last": "2026-11-23 23:30:00+00:00",
       "expected_slots": 17520,
       "rows": 350400,
       "duplicate_slots": 0,
@@ -72,7 +89,7 @@
           "2026-03-29"
         ],
         "50_periods": [
-          "2025-10-26"
+          "2026-10-25"
         ]
       },
       "all_zero_generation_slots_set_missing": 4,
@@ -85,6 +102,18 @@
     }
   ],
   "columns": {
+    "agile_p_kwh_inc_vat": {
+      "missing_before": 0,
+      "filled": 0,
+      "missing_after": 0,
+      "missing_after_pct": 0.0
+    },
+    "agile_p_kwh_exc_vat": {
+      "missing_before": 0,
+      "filled": 0,
+      "missing_after": 0,
+      "missing_after_pct": 0.0
+    },
     "mid_gbp_mwh": {
       "missing_before": 12,
       "filled": 12,
@@ -151,29 +180,29 @@
       "missing_after": 0,
       "missing_after_pct": 0.0
     },
-    "interconnector_net_mw": {
-      "missing_before": 0,
-      "filled": 0,
-      "missing_after": 0,
-      "missing_after_pct": 0.0
-    },
     "wind_share": {
       "missing_before": 4,
       "filled": 4,
       "missing_after": 0,
       "missing_after_pct": 0.0
+    },
+    "interconnector_net_mw": {
+      "missing_before": 0,
+      "filled": 0,
+      "missing_after": 0,
+      "missing_after_pct": 0.0
     }
   },
   "window": {
-    "start_utc": "2025-10-24 00:00:00+00:00",
-    "end_utc": "2026-10-23 22:30:00+00:00",
-    "slots": 17518
+    "start_utc": "2025-11-24 00:00:00+00:00",
+    "end_utc": "2026-11-23 23:30:00+00:00",
+    "slots": 17520
   },
   "o1": {
     "worst_missing_after_pct": 0.0,
     "duplicate_slots_in_sources": 0,
     "duplicate_slots_in_output": 0,
-    "agile_included": false,
-    "pass": false
+    "agile_included": true,
+    "pass": true
   }
 }

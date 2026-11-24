@@ -1,13 +1,7 @@
-"""Download a year of GB grid data from Elexon's Insights API (no key needed).
+"""Download a year of Elexon data to data/raw/elexon_<name>.csv (UTC). No API key needed.
+mid = market index price (GBP/MWh), demand = national demand (MW), fuelhh = generation by fuel (MW).
 
-Datasets (each saved to data/raw/elexon_<name>.csv, UTC, ascending):
-    mid     Market Index price (APX), £/MWh, half-hourly: the wholesale price Agile follows
-    demand  National demand outturn (INDO/ITSDO), MW, half-hourly
-    fuelhh  Generation by fuel type (wind, gas, nuclear ...), MW, half-hourly, long format
-
-Usage:
-    python SOFTWARE/fetch_elexon.py                       # all three, last 365 days
-    python SOFTWARE/fetch_elexon.py --only mid demand --days 400
+Run from the repo root:  python SOFTWARE/fetch_elexon.py [--only mid demand fuelhh] [--days 365]
 """
 import argparse
 import time
@@ -47,7 +41,7 @@ def chunks(start, end):
 
 
 DATASETS = {
-    # name: (path, params builder, columns to keep, de-duplication key)
+    # name: (path, params, columns kept, duplicate key)
     "mid": ("/balancing/pricing/market-index",
             lambda s, e: {"from": f"{s}T00:00Z", "to": f"{e + timedelta(days=1)}T00:00Z",
                           "dataProviders": "APXMIDP"},

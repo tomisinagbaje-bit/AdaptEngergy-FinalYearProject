@@ -1,12 +1,6 @@
-"""Download a year of Octopus Agile half-hourly import prices.
+"""Download Octopus Agile half-hourly prices to data/raw/octopus_agile_<region>.csv (UTC). No API key needed.
 
-Usage:
-    python SOFTWARE/fetch_octopus_agile.py                  # last 365 days, region E
-    python SOFTWARE/fetch_octopus_agile.py --region C --days 400
-    python SOFTWARE/fetch_octopus_agile.py --start 2025-10-01 --end 2026-10-24
-
-Output: data/raw/octopus_agile_<region>.csv  (one row per half-hour, UTC, ascending)
-No API key needed: tariff prices are public.
+Run from the repo root:  python SOFTWARE/fetch_octopus_agile.py [--region E] [--days 365 | --start YYYY-MM-DD --end YYYY-MM-DD]
 """
 import argparse
 import sys
@@ -18,7 +12,7 @@ import pandas as pd
 import requests
 
 BASE = "https://api.octopus.energy/v1"
-# Older Agile versions. Their rates fill in any months the current product doesn't cover.
+# Older Agile products fill any months the current one doesn't cover.
 KNOWN_PRODUCTS = ["AGILE-24-10-01", "AGILE-24-04-03", "AGILE-23-12-06", "AGILE-FLEX-22-11-25"]
 REGIONS = "ABCDEFGHJKLMNP"  # E = West Midlands (Birmingham), C = London
 
@@ -42,7 +36,6 @@ def get_json(url, params=None, tries=4):
 
 
 def current_agile_products():
-    """Agile import products Octopus lists right now (newest first)."""
     url, params, found = f"{BASE}/products/", {"brand": "OCTOPUS_ENERGY", "page_size": 100}, []
     while url:
         d = get_json(url, params)
@@ -110,7 +103,7 @@ def main():
     if not frames:
         sys.exit("No rates returned. Check the region letter and product codes.")
 
-    # Earlier entries in `products` are newer versions, so they win on overlap.
+    # Newer products come first, so they win on overlap.
     df = pd.concat(frames, ignore_index=True)
     df["valid_from"] = pd.to_datetime(df["valid_from"], utc=True)
     df["valid_to"] = pd.to_datetime(df["valid_to"], utc=True)
@@ -123,7 +116,6 @@ def main():
     path = out / f"octopus_agile_{region}.csv"
     df.to_csv(path, index=False)
 
-    # Quick coverage check (first step of T1)
     full = pd.date_range(df["valid_from"].min(), df["valid_from"].max(), freq="30min", tz="UTC")
     missing = full.difference(pd.DatetimeIndex(df["valid_from"]))
     print(f"\nSaved {len(df)} half-hours to {path}")
